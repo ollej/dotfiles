@@ -11,6 +11,8 @@ alias gstat='git diff --stat'
 alias glog='git log --pretty=format:"[%h] %ae, %ar: %s" --stat'
 alias gstaged='git diff --cached'
 
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+
 export GIT_EDITOR=vim
 export GIT_PAGER=less
 
