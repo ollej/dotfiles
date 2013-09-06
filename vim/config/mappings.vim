@@ -157,16 +157,32 @@ noremap <C-y> yy
 " File exploration
 " ----------------
 
-" Shift § opens Fuzzy File Finder
-noremap <silent> ° :FufFile<CR>
-" Alt § opens Fuzzy Tag Finder
-noremap <silent> ¶ :FufTag<CR>
-" Alt e opens Fuzzy Buffer Finder
-noremap <silent> é :FufBuffer<CR>
+"" Shift § opens Fuzzy File Finder
+"noremap <silent> ° :FufFile<CR>
+"" Alt § opens Fuzzy Tag Finder
+"noremap <silent> ¶ :FufTag<CR>
+"" Alt e opens Fuzzy Buffer Finder
+"noremap <silent> é :FufBuffer<CR>
+"
 " Toggle NERD_tree
 noremap <silent> § :NERDTreeToggle<CR>
 " BufExplorer
 noremap <silent> <Leader>§ :BufExplorerHorizontalSplit<CR>
+
+" CtrlP shortcut
+let g:ctrlp_map = '<A-§>'
+noremap <silent> ¶ :CtrlP<CR>
+" CtrlP command
+let g:ctrlp_cmd = 'CtrlP'
+" Most recently used files on Alt-e
+noremap <silent> é :CtrlPMRU<CR>
+noremap <silent> <Alt-e> :CtrlPMRU<CR>
+" CtrlP select buffer
+noremap <silent> ° :CtrlPBuffer<CR>
+noremap <silent> <Shift-§> :CtrlPBuffer<CR>
+" Update tag list
+noremap † :!ctags -R --exclude=.git --exclude=logs --exclude=doc --exclude=tmp .<CR>
+
 
 " Remap VIM 0 to first non-blank character
 noremap 0 ^

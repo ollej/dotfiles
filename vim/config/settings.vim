@@ -51,7 +51,7 @@ set wmh=0                               " Height of inactive window is 0
 " Command behaviour
 set history=1000                            " Remember more commands and search history
 set vb t_vb=                                " Turn off visual bell
-set wildignore=*.swp,*.bak,*.pyc,*.class    " Ignore these files in auto-completion
+set wildignore=*.swp,*.bak,*.pyc,*.class,*~ " Ignore these files in auto-completion
 set clipboard=unnamed                       " Yanks go on clipboard instead.
 set wildchar=<Tab> wildmenu wildmode=full   " Turn on completion menu.
 
@@ -77,8 +77,13 @@ filetype plugin indent on
 colorscheme solarized
 set background=dark
 
-" FuzzyFinder (run ~/bin/ftags.sh . in a directory to setup tags)
-set tags+=.ftags
+" CtrlP
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_clear_cache_on_exit = 0
+
+" Tags
+set tags+=./tags
 
 " Reload file without prompting if it has changed on disk.
 " Will still prompt if there is unsaved text in the buffer.

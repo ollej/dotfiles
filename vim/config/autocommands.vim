@@ -22,7 +22,7 @@ if has("autocmd")
     autocmd FileType puppet,haml,sass,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     "autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     "autocmd FileType perl setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
-    autocmd FileType ruby,eruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType ruby,eruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab tags+=~/.vim/tags/ruby_and_gems
     autocmd FileType javascript setlocal tabstop=4 shiftwidth=4 expandtab
     autocmd FileType coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
     autocmd FileType textile setlocal wrap
