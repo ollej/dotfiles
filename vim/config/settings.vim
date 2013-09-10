@@ -25,7 +25,7 @@ set incsearch                   " Search-as-you-type.
 set nogdefault                  " /g modifier in regexps should work as expected.
 
 " Code handling
-set iskeyword=_,$,#,@,%
+set iskeyword=_,$,#,@,%,?
 set completeopt=longest,menuone
 set ofu=syntaxcomplete#Complete
 set mouse=a                             " Enable mouse mode (toggle with F12)

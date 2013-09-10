@@ -28,15 +28,15 @@ if has("autocmd")
     autocmd FileType textile setlocal wrap
 
     "ruby
-    autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+    autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
     autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
     autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
     " Don't show tabs in html/xml files
-    autocmd filetype html,xml set tabstop=2 softtabstop=2 shiftwidth=2 listchars-=tab:>.
+    autocmd filetype html,xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 listchars-=tab:>.
 
-    autocmd filetype c set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
+    autocmd filetype c setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
 
     " Save/load folds when open/closing buffers
     "autocmd BufWinLeave * mkview

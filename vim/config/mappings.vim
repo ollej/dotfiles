@@ -125,6 +125,15 @@ nmap <Leader>p Ea)<ESC>Bi(<Esc>
 " Add parenthesis around selection.
 vmap <Leader>p xi()<Esc>P
 
+" Add " around word
+nmap <Leader>" Ea"<ESC>Bi"<ESC>
+" Add " around selection
+vmap <Leader>" xi""<Esc>P
+" Add ' around word
+nmap <Leader>' Ea'<ESC>Bi'<ESC>
+" Add ' around selection
+vmap <Leader>' xi''<Esc>P
+
 " Replace all occurrances of word under cursor
 nmap <Leader>f :%s/\<<c-r>=expand("<cword>")<cr>\>/
 " Replace latest search with new word
