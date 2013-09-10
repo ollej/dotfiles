@@ -178,20 +178,32 @@ noremap <silent> § :NERDTreeToggle<CR>
 " BufExplorer
 noremap <silent> <Leader>§ :BufExplorerHorizontalSplit<CR>
 
-" CtrlP shortcut
-let g:ctrlp_map = '<A-§>'
-noremap <silent> ¶ :CtrlP<CR>
-" CtrlP command
-let g:ctrlp_cmd = 'CtrlP'
-" Most recently used files on Alt-e
-noremap <silent> é :CtrlPMRU<CR>
-noremap <silent> <Alt-e> :CtrlPMRU<CR>
-" CtrlP select buffer
-noremap <silent> ° :CtrlPBuffer<CR>
-noremap <silent> <Shift-§> :CtrlPBuffer<CR>
+"" CtrlP shortcut
+"let g:ctrlp_map = '<A-§>'
+"noremap <silent> ¶ :CtrlP<CR>
+"" CtrlP command
+"let g:ctrlp_cmd = 'CtrlP'
+"" Most recently used files on Alt-e
+"noremap <silent> é :CtrlPMRU<CR>
+"noremap <silent> <Alt-e> :CtrlPMRU<CR>
+"" CtrlP select buffer
+"noremap <silent> ° :CtrlPBuffer<CR>
+"noremap <silent> <Shift-§> :CtrlPBuffer<CR>
+
+" CommandT
+
+" Alt § opens file window
+noremap <silent> ¶ :CommandT<CR>
+noremap <silent> <Alt-§> :CommandT<CR>
+" Shift § opens buffer window
+noremap <silent> ° :CommandTBuffer<CR>
+noremap <silent> <Alt-§> :CommandTBuffer<CR>
+" Alt e opens jumplist
+noremap <silent> é :CommandTJump<CR>
+noremap <silent> <Alt-e> :CommandTJump<CR>
+
 " Update tag list
 noremap † :!ctags -R --exclude=.git --exclude=logs --exclude=doc --exclude=tmp .<CR>
-
 
 " Remap VIM 0 to first non-blank character
 noremap 0 ^
