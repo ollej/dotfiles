@@ -10,7 +10,7 @@ nnoremap <C-l> <C-W>l
 " Move to split to the left
 nnoremap <C-h> <C-W>h
 " Quick buffer switching
-noremap <silent> <Tab> :b#<CR>
+nnoremap <silent> <Tab> :b#<CR>
 
 " Paste indented code aka the "stairs"
 nnoremap <C-P> p=`]
@@ -66,89 +66,89 @@ cmap w!! w !sudo tee % >/dev/null
 " ------------------------
 
 " Markdown header level 1
-map <Leader>h1 yypVr=o
+nnoremap <Leader>h1 yypVr=o
 " Markdown header level 2
-map <Leader>h2 yypVr-o
+nnoremap <Leader>h2 yypVr-o
 " Markdown header level 3
-map <Leader>h3 I###<Space><Esc>o
+nnoremap <Leader>h3 I###<Space><Esc>o
 " Markdown header level 4
-map <Leader>h4 I####<Space><Esc>o
+nnoremap <Leader>h4 I####<Space><Esc>o
 " Markdown header level 5
-map <Leader>h5 I#####<Space><Esc>o
+nnoremap <Leader>h5 I#####<Space><Esc>o
 " Markdown header level 6
-map <Leader>h6 I######<Space><Esc>o
+nnoremap <Leader>h6 I######<Space><Esc>o
 " Markdown horizontal line
-map <Leader>hr o<Space>*<Space>*<Space>*<Return><Esc>
+nnoremap <Leader>hr o<Space>*<Space>*<Space>*<Return><Esc>
 " Make selection bold
-vmap <Leader>hb xi****<Esc>hP<Esc>
+vnoremap <Leader>hb xi****<Esc>hP<Esc>
 " Make word bold
-nmap <Leader>hb Bi**<Esc>Ea**<Esc>
+nnoremap <Leader>hb Bi**<Esc>Ea**<Esc>
 " Make selection italics
-vmap <Leader>hi xi__<Esc>P
+vnoremap <Leader>hi xi__<Esc>P
 " Make word italic
-nmap <Leader>hi Bi_<Esc>Ea_<Esc>
+nnoremap <Leader>hi Bi_<Esc>Ea_<Esc>
 " Make word code
-vmap <Leader>hc xi``<Esc>P
+vnoremap <Leader>hc xi``<Esc>P
 " Make selection code
-nmap <Leader>hc Bi`<Esc>Ea`<Esc>
+nnoremap <Leader>hc Bi`<Esc>Ea`<Esc>
 
 "
 " Refactoring
 " -----------
 
 " Format current selection
-vmap Q gq
+vnoremap Q gq
 " Format current paragraph
-nmap Q gqap
+nnoremap Q gqap
 
 " Insert spaces around char
-nmap <Leader>s i<Space><Esc>lli<Space><Esc>b
+nnoremap <Leader>s i<Space><Esc>lli<Space><Esc>b
 " Insert single char
-nmap <Leader>i i_<Esc>r
+nnoremap <Leader>i i_<Esc>r
 " Add empty line below line
-nmap <Leader>o o<Esc>
+nnoremap <Leader>o o<Esc>
 " Add empty line above line
-nmap <Leader>O O<Esc>
+nnoremap <Leader>O O<Esc>
 
 " Add spaces after commas in current line.
-nmap <Leader>S :.s/,\([^ ]\)/, \1/<Return>:noh<Return>
+nnoremap <Leader>S :.s/,\([^ ]\)/, \1/<Return>:noh<Return>
 " Add spaces after commas in current selection.
-vmap <Leader>S "*y:'<,'>s/,\([^ ]\)/, \1/<Return>:noh<Return>
+vnoremap <Leader>S "*y:'<,'>s/,\([^ ]\)/, \1/<Return>:noh<Return>
 
 " Add spaces around brackets in current line.
-nmap <Leader>p :.s/\(\S\)(/\1 (/<Return>:.s/)\(\S\)/) \1/<Return>:noh<Return>
+nnoremap <Leader>p :.s/\(\S\)(/\1 (/<Return>:.s/)\(\S\)/) \1/<Return>:noh<Return>
 " Add spaces around brackets in current selection.
-vmap <Leader>p "*y:'<,'>s/\(\S\)(/\1 (/<Return>:'<,'>s/)\(\S\)/) \1/<Return>:noh<Return>
+vnoremap <Leader>p "*y:'<,'>s/\(\S\)(/\1 (/<Return>:'<,'>s/)\(\S\)/) \1/<Return>:noh<Return>
 
 " Add parenthesis around word
-nmap <Leader>p Ea)<ESC>Bi(<Esc>
+nnoremap <Leader>p Ea)<ESC>Bi(<Esc>
 " Add parenthesis around selection.
-vmap <Leader>p xi()<Esc>P
+vnoremap <Leader>p xi()<Esc>P
 
 " Add " around word
-nmap <Leader>" Ea"<ESC>Bi"<ESC>
+nnoremap <Leader>" Ea"<ESC>Bi"<ESC>
 " Add " around selection
-vmap <Leader>" xi""<Esc>P
+vnoremap <Leader>" xi""<Esc>P
 " Add ' around word
-nmap <Leader>' Ea'<ESC>Bi'<ESC>
+nnoremap <Leader>' Ea'<ESC>Bi'<ESC>
 " Add ' around selection
-vmap <Leader>' xi''<Esc>P
+vnoremap <Leader>' xi''<Esc>P
 
 " Replace all occurrances of word under cursor
-nmap <Leader>f :%s/\<<c-r>=expand("<cword>")<cr>\>/
+nnoremap <Leader>f :%s/\<<c-r>=expand("<cword>")<cr>\>/
 " Replace latest search with new word
-nmap <Leader>F :%s//
+nnoremap <Leader>F :%s//
 
 " Copy line commented with #
-noremap <Leader>c# yyPi#<Esc>j
+nnoremap <Leader>c# yyPi#<Esc>j
 " Copy line commented with "
-noremap <Leader>c "yyPi"<Esc>j
+nnoremap <Leader>c "yyPi"<Esc>j
 " Copy line commented with //
-noremap <Leader>c/ yyPi//<Esc>j
+nnoremap <Leader>c/ yyPi//<Esc>j
 " Syntastic check
-noremap <Leader>l :SyntasticCheck<CR>
+nnoremap <Leader>l :SyntasticCheck<CR>
 " Duplicate line
-noremap <Leader>d mzYp`z
+nnoremap <Leader>d mzYp`z
 
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
@@ -157,11 +157,11 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 " ------------------------
 
 " Move to start of line
-noremap <C-a> <Home>
+nnoremap <C-a> <Home>
 " Move to end of line
-noremap <C-e> <End>
+nnoremap <C-e> <End>
 " Yank line
-noremap <C-y> yy
+nnoremap <C-y> yy
 
 " File exploration
 " ----------------
@@ -174,9 +174,9 @@ noremap <C-y> yy
 "noremap <silent> é :FufBuffer<CR>
 "
 " Toggle NERD_tree
-noremap <silent> § :NERDTreeToggle<CR>
+nnoremap <silent> § :NERDTreeToggle<CR>
 " BufExplorer
-noremap <silent> <Leader>§ :BufExplorerHorizontalSplit<CR>
+nnoremap <silent> <Leader>§ :BufExplorerHorizontalSplit<CR>
 
 "" CtrlP shortcut
 "let g:ctrlp_map = '<A-§>'
@@ -193,17 +193,22 @@ noremap <silent> <Leader>§ :BufExplorerHorizontalSplit<CR>
 " CommandT
 
 " Alt § opens file window
-noremap <silent> ¶ :CommandT<CR>
-noremap <silent> <Alt-§> :CommandT<CR>
+nnoremap <silent> ¶ :CommandT<CR>
+nnoremap <silent> <Alt-§> :CommandT<CR>
 " Shift § opens buffer window
-noremap <silent> ° :CommandTBuffer<CR>
-noremap <silent> <Alt-§> :CommandTBuffer<CR>
+nnoremap <silent> ° :CommandTBuffer<CR>
+nnoremap <silent> <Alt-§> :CommandTBuffer<CR>
 " Alt e opens jumplist
-noremap <silent> é :CommandTJump<CR>
-noremap <silent> <Alt-e> :CommandTJump<CR>
+nnoremap <silent> é :CommandTJump<CR>
+nnoremap <silent> <Alt-e> :CommandTJump<CR>
+let g:CommandTMaxHeight = '10'
+let g:CommandTMatchWindowReverse = '1'
+let g:CommandTCancelMap=['<Esc>', '<C-c>']
+let g:CommandTSelectPrevMap=['<Up>', '<C-k>', '<ESC>OA']
+let g:CommandTSelectNextMap=['<Down>', '<C-j>', '<ESC>OB']
 
 " Update tag list
-noremap † :!ctags -R --exclude=.git --exclude=logs --exclude=doc --exclude=tmp .<CR>
+nnoremap † :!ctags -R --exclude=.git --exclude=logs --exclude=doc --exclude=tmp .<CR>
 
 " Remap VIM 0 to first non-blank character
-noremap 0 ^
+nnoremap 0 ^
