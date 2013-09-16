@@ -15,7 +15,7 @@ set number                      " Show line numbers
 set numberwidth=4               " Use 4 columns for numbers
 set cpoptions+=n                " Use number gutter for wrapped lines.
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-highlight clear SignColumn      " Clear background on signcolumn for gitgutter 
+highlight clear SignColumn      " Clear background on signcolumn for gitgutter
 
 " Search options
 set showmatch                   " Show matching bracket
@@ -65,7 +65,7 @@ set undoreload=10000                        " Number of lines to save for undo
 " Activate pathogen
 call pathogen#infect()
 
-"improve autocomplete menu color
+" Improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
 
 " Syntax highlighting and indentation
@@ -81,6 +81,9 @@ set background=dark
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_clear_cache_on_exit = 0
+
+" Coffeelint configuration
+let g:syntastic_coffee_coffeelint_args="--file ~/.bash/coffeelint.json"
 
 " Tags
 set tags+=./tags

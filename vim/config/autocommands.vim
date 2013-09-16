@@ -15,11 +15,12 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.yaml set filetype=yaml
     autocmd BufNewFile,BufRead *.textile set filetype=textile
     autocmd BufNewFile,BufRead *.pm set filetype=perl
+    autocmd BufNewFile,BufRead *.eco set filetype=html
     "autocmd BufEnter * if &filetype == "" | setlocal ft=txt | endif    " Default to txt filetype
 
     " Settings on a per filetype basis
     autocmd FileType lua setlocal tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab
-    autocmd FileType puppet,haml,sass,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType puppet,haml,sass,yaml,eco setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     "autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     "autocmd FileType perl setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     autocmd FileType ruby,eruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab tags+=~/.vim/tags/ruby_and_gems
@@ -27,14 +28,14 @@ if has("autocmd")
     autocmd FileType coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
     autocmd FileType textile setlocal wrap
 
-    "ruby
+    " Ruby
     autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
     autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
     autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
     " Don't show tabs in html/xml files
-    autocmd filetype html,xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 listchars-=tab:>.
+    autocmd filetype html,xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 listchars-=tab:>. fileencoding=utf8
 
     autocmd filetype c setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
 
