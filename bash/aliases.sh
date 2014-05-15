@@ -5,8 +5,9 @@
 alias cvsst="cvs -q st | grep -vE 'revision|Sticky|^$|==|Commit' | sed -r 's/^File: |Status: //g'"
 alias cvsup="cvs -q up -dP"
 alias sl=ls
-alias rack='ack --ruby --pager="less -R"'
-alias testing="rake db:drop db:create db:migrate db:test:prepare && rake i18n:import_translations db:seed; ls dependencies/promote-*/spec/dummy/db/schema.rb | xargs -n 1 cp -v db/schema.rb; cd dependencies/promote-i18n/ && bundle && rake app:spec; cd ../promote-models/ && bundle && rake app:spec; cd ../promote-builder && bundle && rake app:spec app:jasmine:headless; cd ../.. && bundle && rake konacha:run spec"
+alias rack='ack --ruby'
+alias jack='ack --js'
+alias testing="cd admin && rake db:drop db:create db:migrate db:test:prepare i18n:import db:seed; cd ..; ls */spec/dummy/db/schema.rb | xargs -n 1 cp -v admin/db/schema.rb; cd i18n/ && bundle --quiet && rake app:spec; cd ../base/ && bundle --quiet && rake app:spec; cd ../site && bundle --quiet && rake js:spec spec && cd ../admin && bundle --quiet && rake js:spec spec"
 alias updatectags="ctags -R --exclude=.git --exclude=logs --exclude=doc --exclude=tmp ."
 
 # Pretty ls

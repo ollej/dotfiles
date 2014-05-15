@@ -16,6 +16,8 @@ source $HOME/.bash/rake_completion.sh
 #export CLICOLOR_FORCE=1             # Force color on non-interactive (e.g. pipe to less)
 export LESS="--RAW-CONTROL-CHARS"   # Make ANSI colors work in less
 
+export EDITOR=vim
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 ### Added by the Heroku Toolbelt
@@ -33,5 +35,11 @@ else
     echo "WARNING: Can't find virtualenvwrapper.sh"
 fi
 
+# Vim gpg
+export GPG_TTY=`tty`
+
 # pyenv
 eval "$(pyenv init -)"
+
+# perlbrew
+#source ~/perl5/perlbrew/etc/bashrc

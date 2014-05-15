@@ -108,7 +108,7 @@ function set_host {
     # Add color depending on environment
     HOST="$(uname -n)"
     case "$HOST" in
-        Olles-MacBook-Pro.local) COLOR="${CYAN}"; HOST="macbook" ;;
+        Lamarr.local) COLOR="${CYAN}"; HOST="Lamarr" ;;
         bob) COLOR="${BOLD_CYAN}" ;;
         www1.test)  COLOR="${BOLD_YELLOW}" ;;
         root)       COLOR="${BOLD_RED}" ;;
