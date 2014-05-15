@@ -21,7 +21,8 @@ NO_COLOR="\[\033[0m\]"
 
 function get_git_branch {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "("${ref#refs/heads/}")${NO_COLOR}"
+  #echo "("${ref#refs/heads/}")${NO_COLOR}"
+  echo ${ref#refs/heads/}
 }
 
 # Detect whether the current directory is a subversion repository.
@@ -84,10 +85,11 @@ function set_git_branch {
     fi
 
     # Get the name of the branch.
-    branch_pattern="^# On branch ([^${IFS}]*)"
-    if [[ ${git_status} =~ ${branch_pattern} ]]; then
-        branch=${BASH_REMATCH[1]}
-    fi
+    #branch_pattern="^# On branch ([^${IFS}]*)"
+    #if [[ ${git_status} =~ ${branch_pattern} ]]; then
+    #    branch=${BASH_REMATCH[1]}
+    #fi
+    branch=$(get_git_branch)
 
     # Set the final branch string.
     BRANCH="${state}(${branch})${remote}${NO_COLOR} "
