@@ -2,15 +2,19 @@
 " --------------------------------------
 
 " Move to split below
-nnoremap <C-j> <C-W>j<C-W>_
+nnoremap <C-j> <C-W>j
 " Move to split above
-nnoremap <C-k> <C-W>k<C-W>_
+nnoremap <C-k> <C-W>k
 " Move to split to the right
 nnoremap <C-l> <C-W>l
 " Move to split to the left
 nnoremap <C-h> <C-W>h
 " Quick buffer switching
 nnoremap <silent> <Tab> :b#<CR>
+" Maximize split
+nnoremap <C-m> <C-w>_
+" Make splits equal size
+nnoremap <Leader>m <C-w>=
 
 " Paste indented code aka the "stairs"
 nnoremap <C-P> p=`]
@@ -197,7 +201,7 @@ nnoremap <silent> ¶ :CommandT<CR>
 nnoremap <silent> <Alt-§> :CommandT<CR>
 " Shift § opens buffer window
 nnoremap <silent> ° :CommandTBuffer<CR>
-nnoremap <silent> <Alt-§> :CommandTBuffer<CR>
+nnoremap <silent> <Shift-§> :CommandTBuffer<CR>
 " Alt e opens jumplist
 nnoremap <silent> é :CommandTJump<CR>
 nnoremap <silent> <Alt-e> :CommandTJump<CR>

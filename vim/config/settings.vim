@@ -33,6 +33,7 @@ set mouse=a                             " Enable mouse mode (toggle with F12)
 set listchars=nbsp:·,tab:▸\ ,trail:·    " Configure how invisibles appear.
 set list!                               " Show invisibles.
 set scrolloff=3                         " Minimum number of lines to always show above/below the caret.
+let &showbreak = '…'                    " Use ellipsis to distinguish soft wrapped lines.
 
 " Allow folding of code
 set nofoldenable                        " Don't fold by default
@@ -46,7 +47,7 @@ set backupdir=/tmp/vim/backup           " Hide away backup files.
 
 " Window behaviour
 set hidden                              " Hide buffers instead of closing.
-set wmh=0                               " Height of inactive window is 0
+set winminheight=0                      " Minimum height of inactive window
 
 " Command behaviour
 set history=1000                            " Remember more commands and search history
@@ -84,6 +85,10 @@ let g:ctrlp_clear_cache_on_exit = 0
 
 " Coffeelint configuration
 let g:syntastic_coffee_coffeelint_args="--file ~/.bash/coffeelint.json"
+
+" Encryption
+set cryptmethod=blowfish
+let g:GPGPreferArmor=1
 
 " Tags
 set tags+=./tags
