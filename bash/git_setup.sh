@@ -17,4 +17,5 @@ git config --global alias.ci "commit --verbose"
 git config --global alias.co checkout
 git config --global alias.dc "diff --cached"
 git config --global alias.rb "rebase -p"
-
+git config --global alias.tree "log --graph --oneline"
+git config --global alias.rm "branch -d"

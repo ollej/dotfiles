@@ -16,4 +16,3 @@ source ~/.vim/config/mappings.vim
 source ~/.vim/config/snippets.vim
 source ~/.vim/config/powerline.vim
 source ~/.vim/config/syntastic.vim
-

@@ -43,7 +43,7 @@ set foldlevel=1                         " This is just what i use
 
 " Keep cwd clean
 set directory=/tmp/vim/swap             " Directory for vim swap files
-set backupdir=/tmp/vim/backup           " Hide away backup files.
+set backupdir=/tmp/vim/backup,~/tmp/vim " Hide away backup files.
 
 " Window behaviour
 set hidden                              " Hide buffers instead of closing.

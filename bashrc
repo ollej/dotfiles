@@ -13,6 +13,9 @@ source $HOME/.bash/prompt.sh
 # Support completion for rake tasks
 source $HOME/.bash/rake_completion.sh
 
+# Dir jump: http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
+source $HOME/.bash/marks.sh
+
 #export CLICOLOR_FORCE=1             # Force color on non-interactive (e.g. pipe to less)
 export LESS="--RAW-CONTROL-CHARS"   # Make ANSI colors work in less
 
