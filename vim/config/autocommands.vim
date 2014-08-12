@@ -3,6 +3,9 @@ if has("autocmd")
     " Load templates based on extensions of file
     autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.tpl
 
+    " Disable automatic comment insertion
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
     " Set file types for a bunch of files to get syntax highlighting
     autocmd BufNewFile,BufRead *.txt  set filetype=txt
     autocmd BufNewFile,BufRead *.nse  set filetype=lua
