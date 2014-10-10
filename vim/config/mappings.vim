@@ -214,5 +214,12 @@ let g:CommandTSelectNextMap=['<Down>', '<C-j>', '<ESC>OB']
 " Update tag list
 nnoremap † :!ctags -R --exclude=.git --exclude=logs --exclude=doc --exclude=tmp .<CR>
 
+" RSpec.vim mappings
+map <Leader>rt :call RunCurrentSpecFile()<CR>
+map <Leader>rs :call RunNearestSpec()<CR>
+map <Leader>rl :call RunLastSpec()<CR>
+map <Leader>ra :call RunAllSpecs()<CR>
+
+
 " Remap VIM 0 to first non-blank character
 nnoremap 0 ^
