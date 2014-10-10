@@ -21,6 +21,12 @@ export LESS="--RAW-CONTROL-CHARS"   # Make ANSI colors work in less
 
 export EDITOR=vim
 
+export PATH=/usr/local/bin:$PATH
+
+# Better locale
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 ### Added by the Heroku Toolbelt
