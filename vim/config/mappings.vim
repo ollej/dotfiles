@@ -23,7 +23,7 @@ nnoremap <Leader><Space> :noh<CR>
 " Create new vertical split and switch to it
 nnoremap <Leader>w <C-w>v<C-w>l
 " Use space to toggle folds if we are on a fold
-nnoremap <Space> za
+"nnoremap <Space> za
 " Hide line numbers with C-N C-N
 nmap <C-N><C-N> :set invnumber<CR>
 
@@ -124,19 +124,31 @@ nnoremap <Leader>p :.s/\(\S\)(/\1 (/<Return>:.s/)\(\S\)/) \1/<Return>:noh<Return
 " Add spaces around brackets in current selection.
 vnoremap <Leader>p "*y:'<,'>s/\(\S\)(/\1 (/<Return>:'<,'>s/)\(\S\)/) \1/<Return>:noh<Return>
 
+" Add spaces inside parentheses.
+map <Leader>ss di(i<Space><Space><Esc>P
+
 " Add parenthesis around word
 nnoremap <Leader>p Ea)<ESC>Bi(<Esc>
 " Add parenthesis around selection.
 vnoremap <Leader>p xi()<Esc>P
 
-" Add " around word
-nnoremap <Leader>" Ea"<ESC>Bi"<ESC>
-" Add " around selection
+" Add trailing Semi-colon
+nnoremap <Leader>; g_a;<Esc>
+" Add trailing comma
+nnoremap <Leader>, g_a,<Esc>
+
+" Add " around word. Deprecated, use: csw"
+"nnoremap <Leader>" Ea"<ESC>Bi"<ESC>
+" Add " around selection.
 vnoremap <Leader>" xi""<Esc>P
-" Add ' around word
-nnoremap <Leader>' Ea'<ESC>Bi'<ESC>
+" Add ' around word. Deprecated, use: csw'
+"nnoremap <Leader>' Ea'<ESC>Bi'<ESC>
 " Add ' around selection
 vnoremap <Leader>' xi''<Esc>P
+" Shortcut for surround: cs"'
+nnoremap <Leader>' cs"'
+" Shortcut for surround: cs'"
+nnoremap <Leader>" cs'"
 
 " Replace all occurrances of word under cursor
 nnoremap <Leader>f :%s/\<<c-r>=expand("<cword>")<cr>\>/
@@ -146,7 +158,7 @@ nnoremap <Leader>F :%s//
 " Copy line commented with #
 nnoremap <Leader>c# yyPi#<Esc>j
 " Copy line commented with "
-nnoremap <Leader>c "yyPi"<Esc>j
+nnoremap <Leader>c" yyPi"<Esc>j
 " Copy line commented with //
 nnoremap <Leader>c/ yyPi//<Esc>j
 " Syntastic check
@@ -155,7 +167,7 @@ nnoremap <Leader>l :SyntasticCheck<CR>
 nnoremap <Leader>d mzYp`z
 
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+noremap <Leader>M mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Movement, Emacs mappings
 " ------------------------
