@@ -37,51 +37,51 @@ function is_git_repository {
 
 # Determine the branch information for this subversion repository. No support
 # for svn status, since that needs to hit the remote repository.
-function set_svn_branch {
+function get_svn_prompt {
     # Capture the output of the "git status" command.
-    svn_info="$(svn info | egrep '^URL: ' 2> /dev/null)"
+    local svn_info="$(svn info | egrep '^URL: ' 2> /dev/null)"
 
     # Get the name of the branch.
-    branch_pattern="^URL: .*/(branches|tags)/([^/]+)"
-    trunk_pattern="^URL: .*/trunk(/.*)?$"
+    local branch_pattern="^URL: .*/(branches|tags)/([^/]+)"
+    local trunk_pattern="^URL: .*/trunk(/.*)?$"
     if [[ ${svn_info} =~ $branch_pattern ]]; then
-        branch=${BASH_REMATCH[2]}
+        local branch=${BASH_REMATCH[2]}
     elif [[ ${svn_info} =~ $trunk_pattern ]]; then
-        branch='trunk'
+        local branch='trunk'
     fi
 
     # Set the final branch string.
-    BRANCH="(${branch}) "
+    echo "(${branch}) "
 }
 
 # Determine the branch/state information for this git repository.
-function set_git_branch {
+function get_git_prompt {
     # Capture the output of the "git status" command.
-    git_status="$(git status 2> /dev/null)"
+    local git_status="$(git status 2> /dev/null)"
 
     # Set color based on clean/staged/dirty.
     if [[ ${git_status} =~ "working directory clean" ]]; then
-        state="${GREEN}"
+        local state="${GREEN}"
     elif [[ ${git_status} =~ "Changes to be committed" ]]; then
-        state="${YELLOW}"
+        local state="${YELLOW}"
     else
-        state="${RED}"
+        local state="${RED}"
     fi
 
     # Set arrow icon based on status against remote.
-    remote_pattern="# Your branch is (.*) of"
+    local remote_pattern="# Your branch is (.*) of"
     if [[ ${git_status} =~ ${remote_pattern} ]]; then
         if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
-            remote="↑"
+            local remote="↑"
         else
-            remote="↓"
+            local remote="↓"
         fi
     else
-        remote=""
+        local remote=""
     fi
-    diverge_pattern="# Your branch and (.*) have diverged"
+    local diverge_pattern="# Your branch and (.*) have diverged"
     if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-        remote="↕"
+        local remote="↕"
     fi
 
     # Get the name of the branch.
@@ -89,78 +89,81 @@ function set_git_branch {
     #if [[ ${git_status} =~ ${branch_pattern} ]]; then
     #    branch=${BASH_REMATCH[1]}
     #fi
-    branch=$(get_git_branch)
+    local branch=$(get_git_branch)
 
     # Set the final branch string.
-    BRANCH="${state}(${branch})${remote}${NO_COLOR} "
+    echo "${state}(${branch})${remote}${NO_COLOR} "
 }
 
-function set_user {
+function get_user {
     local COLOR="$WHITE"
     case "$USER" in
-        root)   COLOR="${BOLD_RED}" ;;
-        olle)   COLOR="${GREEN}" ;;
-        olljoh) COLOR="${GREEN}" ;;
-        *)      COLOR="${YELLOW}" ;;
+        root)   local COLOR="${BOLD_RED}" ;;
+        olle)   local COLOR="${GREEN}" ;;
+        olljoh) local COLOR="${GREEN}" ;;
+        *)      local COLOR="${YELLOW}" ;;
     esac
-    USERNAME="${COLOR}${USER}${NO_COLOR}"
+    echo "${COLOR}${USER}${NO_COLOR}"
 }
 
-function set_host {
+function get_host {
     # Add color depending on environment
-    HOST="$(uname -n)"
+    local HOST="$(uname -n)"
     case "$HOST" in
-        Lamarr.local) COLOR="${CYAN}"; HOST="Lamarr" ;;
-        bob) COLOR="${BOLD_CYAN}" ;;
-        www1.test)  COLOR="${BOLD_YELLOW}" ;;
-        root)       COLOR="${BOLD_RED}" ;;
-        *)          COLOR="${YELLOW}" ;;
+        Lamarr.local) local COLOR="${CYAN}"; HOST="Lamarr" ;;
+        bob)          local COLOR="${BOLD_CYAN}" ;;
+        *)            local COLOR="${YELLOW}" ;;
     esac
-    HOST="${COLOR}${HOST}${NO_COLOR}"
+    echo "${COLOR}${HOST}${NO_COLOR}"
 }
 
-function set_dir {
-    DIR="$(pwd)"
-    DIR="${DIR/$HOME/~}"
+function get_dir {
+    local DIR="$(pwd)"
+    local DIR="$(echo $DIR | sed 's/\/Users\/olle/~/')"
+    local DIR="$(echo $DIR | sed 's/\/home\/olle/~/')"
     # Add color depending on path
     local COLOR="$WHITE"
     case "$DIR" in
-        ~)                 COLOR="${BOLD_WHITE}" ;;
-        */Development/*)   COLOR="${YELLOW}" ;;
-        */chewbacca_dev/*) COLOR="${GREEN}" ;;
-        */rf-git/*)        COLOR="${BOLD_WHITE}" ;;
+        ~)                 local COLOR="${BOLD_WHITE}" ;;
+        */Development/*)   local COLOR="${YELLOW}" ;;
+        */Dropbox/*)       local COLOR="${GREEN}" ;;
+        */Downloads/*)     local COLOR="${BLUE}" ;;
+        */rf-git/*)        local COLOR="${BOLD_WHITE}" ;;
     esac
-    DIR="${COLOR}${DIR}${NO_COLOR}"
+    local DIR="${COLOR}${DIR}${NO_COLOR}"
+    echo $DIR
 }
 
 # Return the prompt symbol to use, colorized based on the return value of the
 # previous command.
-function set_prompt_symbol () {
-    if test $1 -eq 0 ; then
-        PROMPT_SYMBOL="\$"
+function get_prompt_symbol {
+    local EXITCODE=$1
+    if test $EXITCODE -eq 0 ; then
+        local PROMPT_SYMBOL="${GREEN}\$"
     else
-        PROMPT_SYMBOL="${RED}\$"
+        local PROMPT_SYMBOL="${RED}[$EXITCODE] \$"
     fi
+    echo $PROMPT_SYMBOL
 }
 
 function setup_prompt {
     # Set the PROMPT_SYMBOL variable. We do this first so we don't lose the
     # return value of the last command.
-    set_prompt_symbol $?
+    local PROMPT_SYMBOL=$(get_prompt_symbol $?)
 
     # Set the BRANCH variable.
     if is_git_repository ; then
-        set_git_branch
+        local BRANCH=$(get_git_prompt)
     elif is_svn_repository ; then
-        set_svn_branch
+        local BRANCH=$(get_svn_prompt)
     else
-        BRANCH=''
+        local BRANCH=''
     fi
 
     # Setup dir/user etc with colors
-    set_dir
-    set_user
-    set_host
+    local DIR=$(get_dir)
+    local USERNAME=$(get_user)
+    local HOST=$(get_host)
 
     # Show debian chroot at begininning of prompt
     local CHROOT="${BOLD_WHITE}${debian_chroot:+($debian_chroot)}${NO_COLOR}"
