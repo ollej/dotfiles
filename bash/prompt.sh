@@ -108,30 +108,31 @@ function get_user {
 
 function get_host {
     # Add color depending on environment
-    local HOST="$(uname -n)"
-    case "$HOST" in
-        Lamarr.local) local COLOR="${CYAN}"; HOST="Lamarr" ;;
+    local host="$(uname -n)"
+    case "$host" in
+        Lamarr.local) local COLOR="${CYAN}"; host="" ;; #host="Lamarr" ;;
         bob)          local COLOR="${BOLD_CYAN}" ;;
         *)            local COLOR="${YELLOW}" ;;
     esac
-    echo "${COLOR}${HOST}${NO_COLOR}"
+    echo "${COLOR}${host}${NO_COLOR}"
 }
 
 function get_dir {
-    local DIR="$(pwd)"
-    local DIR="$(echo $DIR | sed 's/\/Users\/olle/~/')"
-    local DIR="$(echo $DIR | sed 's/\/home\/olle/~/')"
+    local dir="$(pwd)"
+    local dir="$(echo $dir | sed 's/\/Users\/olle/~/')"
+    local dir="$(echo $dir | sed 's/\/home\/olle/~/')"
+    # Strip all but last part
+    dir=$(basename "$dir")
     # Add color depending on path
-    local COLOR="$WHITE"
-    case "$DIR" in
-        ~)                 local COLOR="${BOLD_WHITE}" ;;
-        */Development/*)   local COLOR="${YELLOW}" ;;
-        */Dropbox/*)       local COLOR="${GREEN}" ;;
-        */Downloads/*)     local COLOR="${BLUE}" ;;
-        */rf-git/*)        local COLOR="${BOLD_WHITE}" ;;
+    local color="$WHITE"
+    case "$dir" in
+        olle | ~)          local color="${BOLD_WHITE}" ;;
+        Development)   local color="${YELLOW}" ;;
+        Dropbox)       local color="${GREEN}" ;;
+        Downloads)     local color="${BLUE}" ;;
     esac
-    local DIR="${COLOR}${DIR}${NO_COLOR}"
-    echo $DIR
+    local dir="${color}${dir}${NO_COLOR}"
+    echo $dir
 }
 
 # Return the prompt symbol to use, colorized based on the return value of the
@@ -146,29 +147,39 @@ function get_prompt_symbol {
     echo $PROMPT_SYMBOL
 }
 
+function get_cluster {
+    if [ -n "$CLUSTER" ]; then
+        local cluster_prompt="${BOLD_PURPLE}«${CLUSTER}» ${NO_COLOR}"
+    else
+        local cluster_prompt=""
+    fi
+    echo $cluster_prompt
+}
+
 function setup_prompt {
     # Set the PROMPT_SYMBOL variable. We do this first so we don't lose the
     # return value of the last command.
-    local PROMPT_SYMBOL=$(get_prompt_symbol $?)
+    local prompt_symbol=$(get_prompt_symbol $?)
 
     # Set the BRANCH variable.
     if is_git_repository ; then
-        local BRANCH=$(get_git_prompt)
+        local branch=$(get_git_prompt)
     elif is_svn_repository ; then
-        local BRANCH=$(get_svn_prompt)
+        local branch=$(get_svn_prompt)
     else
-        local BRANCH=''
+        local branch=''
     fi
 
     # Setup dir/user etc with colors
-    local DIR=$(get_dir)
-    local USERNAME=$(get_user)
-    local HOST=$(get_host)
+    local dir=$(get_dir)
+    local username=$(get_user)
+    local host=$(get_host)
+    local cluster=$(get_cluster)
 
     # Show debian chroot at begininning of prompt
     local CHROOT="${BOLD_WHITE}${debian_chroot:+($debian_chroot)}${NO_COLOR}"
 
-    PS1="${CHROOT}${USERNAME}${WHITE}@${HOST}${WHITE}:${DIR} ${BRANCH}${PROMPT_SYMBOL} ${NO_COLOR}"
+    PS1="${CHROOT}${cluster}${username}${WHITE}@${host}${WHITE}:${dir} ${branch}${prompt_symbol} ${NO_COLOR}"
 }
 
 # Tell bash to execute this function just before displaying its prompt.
