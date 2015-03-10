@@ -20,9 +20,7 @@ BOLD_WHITE="\[\033[1;37m\]"
 NO_COLOR="\[\033[0m\]"
 
 function get_git_branch {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  #echo "("${ref#refs/heads/}")${NO_COLOR}"
-  echo ${ref#refs/heads/}
+  git symbolic-ref --short HEAD
 }
 
 # Detect whether the current directory is a subversion repository.
@@ -32,7 +30,7 @@ function is_svn_repository {
 
 # Detect whether the current directory is a git repository.
 function is_git_repository {
-    git branch > /dev/null 2>&1
+    [ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]
 }
 
 # Determine the branch information for this subversion repository. No support
@@ -54,45 +52,48 @@ function get_svn_prompt {
     echo "(${branch}) "
 }
 
+# Set arrow icon based on status against remote.
+function get_git_remote_status {
+    local local=$(git rev-parse @ 2> /dev/null)
+    local remote=$(git rev-parse @{u} 2> /dev/null)
+    local base=$(git merge-base @ @{u} 2> /dev/null)
+
+    if [ -z "$remote" ]; then
+        echo "♨" # No remote
+    elif [ "$local" = "$remote" ]; then
+        echo "✔" # Up-to-date
+    elif [ "$local" = "$base" ]; then
+        echo "↓" # Need to pull
+    elif [ "$remote" = "$base" ]; then
+        echo "↑" # Need to push
+    else
+        echo "⇵" # Diverged
+    fi
+}
+
+function git_uncommitted_changes {
+    git diff --cached --exit-code 2>&1 >/dev/null
+    [ $? -gt 0 ]
+}
+
+function git_unstaged_changes {
+    git diff --exit-code 2>&1 >/dev/null
+    [ $? -gt 0 ]
+}
+
 # Determine the branch/state information for this git repository.
 function get_git_prompt {
-    # Capture the output of the "git status" command.
-    local git_status="$(git status 2> /dev/null)"
-
     # Set color based on clean/staged/dirty.
-    if [[ ${git_status} =~ "working directory clean" ]]; then
-        local state="${GREEN}"
-    elif [[ ${git_status} =~ "Changes to be committed" ]]; then
-        local state="${YELLOW}"
-    else
+    if git_unstaged_changes ; then
         local state="${RED}"
-    fi
-
-    # Set arrow icon based on status against remote.
-    local remote_pattern="# Your branch is (.*) of"
-    if [[ ${git_status} =~ ${remote_pattern} ]]; then
-        if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
-            local remote="↑"
-        else
-            local remote="↓"
-        fi
+    elif git_uncommitted_changes ; then
+        local state="${GREEN}"
     else
-        local remote=""
+        local state="${GREEN}"
     fi
-    local diverge_pattern="# Your branch and (.*) have diverged"
-    if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-        local remote="↕"
-    fi
-
-    # Get the name of the branch.
-    #branch_pattern="^# On branch ([^${IFS}]*)"
-    #if [[ ${git_status} =~ ${branch_pattern} ]]; then
-    #    branch=${BASH_REMATCH[1]}
-    #fi
-    local branch=$(get_git_branch)
 
     # Set the final branch string.
-    echo "${state}(${branch})${remote}${NO_COLOR} "
+    echo "${state}($(get_git_branch))$(get_git_remote_status)${NO_COLOR} "
 }
 
 function get_user {
@@ -126,34 +127,46 @@ function get_dir {
     # Add color depending on path
     local color="$WHITE"
     case "$dir" in
-        olle | ~)          local color="${BOLD_WHITE}" ;;
+        olle | ~)      local color="${BOLD_WHITE}" ;;
         Development)   local color="${YELLOW}" ;;
         Dropbox)       local color="${GREEN}" ;;
         Downloads)     local color="${BLUE}" ;;
     esac
-    local dir="${color}${dir}${NO_COLOR}"
-    echo $dir
+    echo "${color}${dir}${NO_COLOR}"
 }
 
 # Return the prompt symbol to use, colorized based on the return value of the
 # previous command.
 function get_prompt_symbol {
     local EXITCODE=$1
+
     if test $EXITCODE -eq 0 ; then
-        local PROMPT_SYMBOL="${GREEN}\$"
+        echo "${GREEN}\$"
     else
-        local PROMPT_SYMBOL="${RED}[$EXITCODE] \$"
+        echo "${RED}[$EXITCODE] \$"
     fi
-    echo $PROMPT_SYMBOL
 }
 
 function get_cluster {
     if [ -n "$CLUSTER" ]; then
-        local cluster_prompt="${BOLD_PURPLE}«${CLUSTER}» ${NO_COLOR}"
-    else
-        local cluster_prompt=""
+        echo "${BOLD_PURPLE}«${CLUSTER}» ${NO_COLOR}"
+    elif [ -n "$SERVICE" ]; then
+        echo "${PURPLE}«${SERVICE}» ${NO_COLOR}"
     fi
-    echo $cluster_prompt
+}
+
+# Set the BRANCH variable.
+function get_branch {
+    if is_git_repository ; then
+        get_git_prompt
+    elif is_svn_repository ; then
+        get_svn_prompt
+    fi
+}
+
+# Show debian chroot at begininning of prompt
+function get_chroot {
+    echo "${BOLD_WHITE}${debian_chroot:+($debian_chroot)}${NO_COLOR}"
 }
 
 function setup_prompt {
@@ -161,25 +174,7 @@ function setup_prompt {
     # return value of the last command.
     local prompt_symbol=$(get_prompt_symbol $?)
 
-    # Set the BRANCH variable.
-    if is_git_repository ; then
-        local branch=$(get_git_prompt)
-    elif is_svn_repository ; then
-        local branch=$(get_svn_prompt)
-    else
-        local branch=''
-    fi
-
-    # Setup dir/user etc with colors
-    local dir=$(get_dir)
-    local username=$(get_user)
-    local host=$(get_host)
-    local cluster=$(get_cluster)
-
-    # Show debian chroot at begininning of prompt
-    local CHROOT="${BOLD_WHITE}${debian_chroot:+($debian_chroot)}${NO_COLOR}"
-
-    PS1="${CHROOT}${cluster}${username}${WHITE}@${host}${WHITE}:${dir} ${branch}${prompt_symbol} ${NO_COLOR}"
+    PS1="${get_chroot}$(get_cluster)$(get_user)${WHITE}@$(get_host)${WHITE}:$(get_dir) $(get_branch)${prompt_symbol} ${NO_COLOR}"
 }
 
 # Tell bash to execute this function just before displaying its prompt.
