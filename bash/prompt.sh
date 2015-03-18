@@ -30,7 +30,7 @@ function is_svn_repository {
 
 # Detect whether the current directory is a git repository.
 function is_git_repository {
-    [ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]
+    [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" == 'true' ]
 }
 
 # Determine the branch information for this subversion repository. No support
@@ -54,17 +54,17 @@ function get_svn_prompt {
 
 # Set arrow icon based on status against remote.
 function get_git_remote_status {
-    local local=$(git rev-parse @ 2> /dev/null)
-    local remote=$(git rev-parse @{u} 2> /dev/null)
-    local base=$(git merge-base @ @{u} 2> /dev/null)
+    local rev_local=$(git rev-parse @ 2> /dev/null)
+    local rev_remote=$(git rev-parse @{u} 2> /dev/null)
+    local rev_base=$(git merge-base @ @{u} 2> /dev/null)
 
-    if [ -z "$remote" ]; then
+    if [ -z "$rev_remote" ]; then
         echo "♨" # No remote
-    elif [ "$local" = "$remote" ]; then
+    elif [ "$rev_local" = "$rev_remote" ]; then
         echo "✔" # Up-to-date
-    elif [ "$local" = "$base" ]; then
+    elif [ "$rev_local" = "$rev_base" ]; then
         echo "↓" # Need to pull
-    elif [ "$remote" = "$base" ]; then
+    elif [ "$rev_remote" = "$rev_base" ]; then
         echo "↑" # Need to push
     else
         echo "⇵" # Diverged

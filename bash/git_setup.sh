@@ -19,3 +19,5 @@ git config --global alias.dc "diff --cached"
 git config --global alias.rb "rebase -p"
 git config --global alias.tree "log --graph --oneline"
 git config --global alias.rm "branch -d"
+git config --global alias.unstage 'reset HEAD --'
+git config --global alias.last 'log -1 HEAD'
