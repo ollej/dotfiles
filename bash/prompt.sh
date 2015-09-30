@@ -20,7 +20,7 @@ BOLD_WHITE="\[\033[1;37m\]"
 NO_COLOR="\[\033[0m\]"
 
 function get_git_branch {
-  git symbolic-ref --short HEAD
+  git symbolic-ref --short HEAD --quiet
 }
 
 # Detect whether the current directory is a subversion repository.

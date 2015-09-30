@@ -53,3 +53,13 @@ eval "$(pyenv init -)"
 
 # perlbrew
 #source ~/perl5/perlbrew/etc/bashrc
+
+PERL_MB_OPT="--install_base \"/Users/olle/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/olle/perl5"; export PERL_MM_OPT;
+export ES_HOME=/usr/local/Cellar/elasticsearch/1.3.2/
+export KEY=~/Seafile/Server\ Info/Keys/avidity_second.key
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
