@@ -21,3 +21,4 @@ git config --global alias.tree "log --graph --oneline"
 git config --global alias.rm "branch -d"
 git config --global alias.unstage 'reset HEAD --'
 git config --global alias.last 'log -1 HEAD'
+git config --global alias.cowboy '!f() { git checkout --track -b "oj-$1" origin/master; }; f'

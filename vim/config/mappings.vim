@@ -195,33 +195,15 @@ nnoremap <silent> § :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>§ :BufExplorerHorizontalSplit<CR>
 
 "" CtrlP shortcut
-"let g:ctrlp_map = '<A-§>'
-"noremap <silent> ¶ :CtrlP<CR>
-"" CtrlP command
-"let g:ctrlp_cmd = 'CtrlP'
-"" Most recently used files on Alt-e
-"noremap <silent> é :CtrlPMRU<CR>
-"noremap <silent> <Alt-e> :CtrlPMRU<CR>
-"" CtrlP select buffer
-"noremap <silent> ° :CtrlPBuffer<CR>
-"noremap <silent> <Shift-§> :CtrlPBuffer<CR>
+let g:ctrlp_map = '<A-§>'
+nnoremap <silent> ¶ :CtrlP<CR>
+" Select files, buffers and most recently used files on Alt-e
+nnoremap <silent> é :CtrlPMixed<CR>
+nnoremap <silent> <Alt-e> :CtrlPMixed<CR>
+" CtrlP select buffer
+nnoremap <silent> ° :CtrlPBuffer<CR>
+nnoremap <silent> <Shift-§> :CtrlPBuffer<CR>
 
-" CommandT
-
-" Alt § opens file window
-nnoremap <silent> ¶ :CommandT<CR>
-nnoremap <silent> <Alt-§> :CommandT<CR>
-" Shift § opens buffer window
-nnoremap <silent> ° :CommandTBuffer<CR>
-nnoremap <silent> <Shift-§> :CommandTBuffer<CR>
-" Alt e opens jumplist
-nnoremap <silent> é :CommandTJump<CR>
-nnoremap <silent> <Alt-e> :CommandTJump<CR>
-let g:CommandTMaxHeight = '10'
-let g:CommandTMatchWindowReverse = '1'
-let g:CommandTCancelMap=['<Esc>', '<C-c>']
-let g:CommandTSelectPrevMap=['<Up>', '<C-k>', '<ESC>OA']
-let g:CommandTSelectNextMap=['<Down>', '<C-j>', '<ESC>OB']
 
 " Update tag list
 nnoremap † :!ctags -R --exclude=.git --exclude=logs --exclude=doc --exclude=tmp .<CR>
