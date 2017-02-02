@@ -1,243 +1,176 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim ColorScheme: C64
+" Vim C64 color scheme
+" Author: Aaron Maupin <maupin@pastrytech.com>
+" Base grouping come from Gerardo Galindez's <gerardo.galindez@gmail.com> 
+" Vim color scheme template
 "
-" Maintainer: Niklas Lindström <lindstream@gmail.com>
-" Last Change: 2011-01-23
-" Version: 0.1.0
+" Feel free to edit and redistribute as you like!
 "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" This vim script and colorscheme can use different C64 color profiles and is
-" generally made as a toy.
-"
-" For good fun with a boot load sequence, define:
-"
-"   :let g:hi_c64_boot = 1
-"
-" before sourcing the script (e.g. doing :colorscheme c64).
-"
-"
-" It's nigh mandatory to combine this colorscheme with these awesome C64
-" fonts:
-"
-"   <http://www.kreativekorp.com/software/fonts/c64.shtml>
-"
-" For the best C64 experience, install some of those and do e.g.:
-"
-"   :set guifont=Pet\ Me\ 64\ 2Y:h11
-"
-"
-" While this is somewhat of a draft, I hope you enjoy it!
-"
-" ?SYNTAX ERROR
-" READY.
-"
-""
 
-hi clear
-let g:colors_name = "c64"
+set background=dark
 
-
-command! -nargs=* HiC64 :call <SID>HiC64(<f-args>)
-
-func! s:HiC64(group, fg, bg, gui)
-  let fg = s:get_color(a:fg)
-  let bg = s:get_color(a:bg)
-  exec printf("hi %s guifg=%s guibg=%s gui=%s", a:group, fg, bg, a:gui)
-endfunc
-
-func! s:get_color(name)
-  let [setname, name] = [g:hi_c64_colorset, a:name]
-  if name =~ ':'
-    let [setname, name] = split(name, ':')
-  endif
-  return get(s:colorsets[setname], name, name)
-endfunc
-
-let s:colorsets = {}
-
-if !exists('g:hi_c64_colorset')
-  let g:hi_c64_colorset = 'ccs'
+highlight clear
+if exists("syntax_on")
+    syntax reset
 endif
+let g:colors_name="C64"
 
-
-""
-" Bonus: Rotate the colors LOAD style
+" Commodore 64 colors (using the "wanja" palette)
 "
-func! HiC64Rotate(group, parts, step)
-  let group = a:group == '.'?
-        \ synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name")
-        \ : a:group
-  let groupId = hlID(group == ''? 'Normal' : group)
-  let cmd = 'hi ' . group
-  let colorset = s:colorsets[g:hi_c64_colorset]
-  let colorkeys = keys(colorset)
-  let colors = values(colorset) "map(colorkeys, 'colorset[v:val]')
-  for part in a:parts
-    let current = index(colors, synIDattr(hlID(a:group), part.'#'))
-    if current != -1
-      let i = current + a:step
-      let i = i >= len(colorkeys)? 0 : i < 0? len(colorkeys)-1 : i
-      let cmd .= printf(' gui%s=%s', part, colorset[colorkeys[i]])
-    endif
-  endfor
-  exec cmd
-endfunc
+" 0 #000000 black
+" 1 #ffffff white
+" 2 #ad524a red
+" 3 #73f7f7 cyan
+" 4 #bd6bbd purple
+" 5 #73e773 green 
+" 6 #181090 blue
+" 7 #ffff7b yellow
+" 8 #c88e2f orange
+" 9 #846339 brown
+" 10 #ff9c9c light red
+" 11 #7b7b7b dark gray
+" 12 #949494 gray
+" 13 #a5ffa5 light green
+" 14 #9c9cf7 light blue
+" 15 #cecece light gray
 
-""
-" Bonus: Theme BOOT
-"
-func! HiC64Boot()
-  HiC64 Normal lightblue blue NONE
-  HiC64 LineNr blue lightblue NONE
-  HiC64 NonText blue lightblue NONE
-  redraw
-  echo 'READY.' | echo ''
-  for c in split('LOAD "*",8,1', '\zs')
-    sleep 50 m | echon c
-  endfor
-  echo 'LOADING'
-  sleep 600 m | echo 'READY.'
-  sleep 200 m | echo 'RUN'
-  sleep 400 m | redraw | sleep 200 m
-  let i = 0
-  let rotation = len(s:colorsets[g:hi_c64_colorset]) * 2
-  while i < rotation
-    let i += 1
-    sleep 5 m
-    for group in ['Normal', 'LineNr', 'NonText']
-      call HiC64Rotate(group, ['bg', 'fg'], 1)
-    endfor
-    redraw
-  endwhile
-endfunc
+" --------------------------------
+" Editor settings
+" --------------------------------
+
+hi Normal          guifg=#cecece    guibg=#4242c6    guisp=#4242c6    gui=NONE    ctermfg=252 ctermbg=62    cterm=NONE
+hi Cursor          guifg=NONE    guibg=#9c9cf7    guisp=#9c9cf7    gui=NONE    ctermfg=NONE ctermbg=147    cterm=NONE
+hi CursorLine      guifg=NONE    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi LineNr          guifg=#4242c6    guibg=#9c9cf7    guisp=#9c9cf7    gui=NONE    ctermfg=62 ctermbg=147    cterm=NONE
+hi CursorLineNR    guifg=#ffffff    guibg=#9c9cf7    guisp=#9c9cf7    gui=NONE    ctermfg=15 ctermbg=147    cterm=NONE
+
+" -----------------
+" - Number column -
+" -----------------
+hi CursorColumn    guifg=NONE    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi FoldColumn      guifg=NONE    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi SignColumn      guifg=NONE    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Folded          guifg=NONE    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+
+" -------------------------
+" - Window/Tab delimiters - 
+" -------------------------
+
+hi VertSplit       guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=15 ctermbg=NONE    cterm=NONE
+hi ColorColumn     guifg=#4242c6    guibg=#9c9cf7    guisp=#9c9cf7    gui=NONE    ctermfg=62 ctermbg=147    cterm=NONE
+hi TabLine         guifg=#cecece    guibg=#7b7b7b    guisp=#7b7b7b    gui=NONE    ctermfg=252 ctermbg=8    cterm=NONE
+hi TabLineFill     guifg=NONE    guibg=#9c9cf7    guisp=#9c9cf7    gui=NONE    ctermfg=NONE ctermbg=147    cterm=NONE
+hi TabLineSel      guifg=#ffffff    guibg=#949494    guisp=#949494    gui=NONE    ctermfg=15 ctermbg=246    cterm=NONE
+
+" -------------------------------
+" - File Navigation / Searching -
+" -------------------------------
+hi Directory       guifg=#73f7f7    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=123 ctermbg=NONE    cterm=NONE
+hi Search          guifg=#ffffff    guibg=#73e773    guisp=#73e773    gui=NONE    ctermfg=15 ctermbg=77    cterm=NONE
+hi IncSearch       guifg=#ffff7b    guibg=#846339    guisp=#846339    gui=NONE    ctermfg=228 ctermbg=101    cterm=NONE
+
+" -----------------
+" - Prompt/Status -
+" -----------------
+hi StatusLine      guifg=#ffffff    guibg=#9c9cf7    guisp=#9c9cf7    gui=NONE    ctermfg=15 ctermbg=147    cterm=NONE
+hi StatusLineNC    guifg=#4242c6    guibg=#9c9cf7    guisp=#9c9cf7    gui=NONE    ctermfg=62 ctermbg=147    cterm=NONE
+hi WildMenu        guifg=#ffffff    guibg=#73e773    guisp=#73e773    gui=NONE    ctermfg=NONE ctermbg=77    cterm=NONE
+hi Question        guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Title           guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi ModeMsg         guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi MoreMsg         guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+
+" --------------
+" - Visual aid -
+" --------------
+hi MatchParen      guifg=#4242c6    guibg=#9c9cf7   guisp=#9c9cf7    gui=NONE    ctermfg=62 ctermbg=147    cterm=NONE
+hi Visual          guifg=NONE    guibg=#7b7b7b    guisp=#7b7b7b    gui=NONE    ctermfg=NONE ctermbg=8    cterm=NONE
+hi VisualNOS       guifg=NONE    guibg=#bd6bbd    guisp=#bd6bbd    gui=NONE    ctermfg=NONE ctermbg=133    cterm=NONE
+hi NonText         guifg=#7b7b7b    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=8 ctermbg=NONE    cterm=NONE
+
+hi Todo            guifg=#ffffff    guibg=#bd6bbd    guisp=#bd6bbd    gui=NONE    ctermfg=15 ctermbg=133    cterm=NONE
+hi Underlined      guifg=NONE    guibg=#7b7b7b    guisp=#7b7b7b    gui=NONE    ctermfg=NONE ctermbg=8    cterm=NONE
+hi Error           guifg=#000000    guibg=#ad524a    guisp=#ad524a    gui=NONE    ctermfg=NONE ctermbg=131    cterm=NONE
+hi ErrorMsg        guifg=#000000    guibg=#ad524a    guisp=#ad524a    gui=NONE    ctermfg=NONE ctermbg=131    cterm=NONE
+hi WarningMsg      guifg=#000000    guibg=#ffff7b    guisp=#ffff7b    gui=NONE    ctermfg=NONE ctermbg=228    cterm=NONE
+hi Ignore          guifg=#7b7b7b    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=8 ctermbg=NONE    cterm=NONE
+hi SpecialKey      guifg=#7b7b7b    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=8 ctermbg=NONE    cterm=NONE
+
+" --------------------------------
+" Variable types
+" --------------------------------
+hi Constant        guifg=#ff9c9c    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=217 ctermbg=NONE    cterm=NONE
+hi String          guifg=#73f7f7    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=123 ctermbg=NONE    cterm=NONE
+hi StringDelimiter guifg=#73f7f7    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=123 ctermbg=NONE    cterm=NONE
+hi Character       guifg=#73f7f7    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=123 ctermbg=NONE    cterm=NONE
+hi Number          guifg=#ffff7b    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=123 ctermbg=NONE    cterm=NONE
+hi Boolean         guifg=#ff9c9c    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=217 ctermbg=NONE    cterm=NONE
+hi Float           guifg=#ffff7b    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=228 ctermbg=NONE    cterm=NONE
+
+hi Identifier      guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Function        guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+
+" --------------------------------
+" Language constructs
+" --------------------------------
+hi Statement       guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Conditional     guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Repeat          guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Label           guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Operator        guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Keyword         guifg=#ff9c9c    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=217 ctermbg=NONE    cterm=NONE
+hi Exception       guifg=#ff9c9c    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=217 ctermbg=NONE    cterm=NONE
+hi Comment         guifg=#a5ffa5    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=157 ctermbg=NONE    cterm=NONE
+
+hi Special         guifg=#4242c6    guibg=#cecece    guisp=#cecece    gui=NONE    ctermfg=62 ctermbg=252    cterm=NONE
+hi SpecialChar     guifg=#4242c6    guibg=#cecece    guisp=#cecece    gui=NONE    ctermfg=62 ctermbg=252    cterm=NONE
+hi Tag             guifg=NONE    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Delimiter       guifg=NONE    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi SpecialComment  guifg=NONE    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Debug           guifg=#ff9c9c    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=217 ctermbg=NONE    cterm=NONE
+
+" ----------
+" - C like -
+" ----------
+hi PreProc         guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Include         guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Define          guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi Macro           guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi PreCondit       guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+
+hi Type            guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+hi StorageClass    guifg=#ff9c9c    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=217 ctermbg=NONE    cterm=NONE
+hi Structure       guifg=#ff9c9c    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=217 ctermbg=NONE    cterm=NONE
+hi Typedef         guifg=#ffffff    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=NONE ctermbg=NONE    cterm=NONE
+
+" --------------------------------
+" Diff
+" --------------------------------
+hi DiffAdd         guifg=#181090    guibg=#73e773    guisp=#73e773    gui=NONE    ctermfg=15 ctermbg=77    cterm=NONE
+hi DiffChange      guifg=NONE    guibg=#c88e2f    guisp=#c88e2f    gui=NONE    ctermfg=NONE ctermbg=179    cterm=NONE
+hi DiffDelete      guifg=NONE    guibg=#ad524a    guisp=#ad524a    gui=NONE    ctermfg=NONE ctermbg=131    cterm=NONE
+hi DiffText        guifg=#ffffff    guibg=#bd6bbd    guisp=#bd6bbd    gui=NONE    ctermfg=15 ctermbg=133    cterm=NONE
+
+" --------------------------------
+" Completion menu
+" --------------------------------
+hi Pmenu           guifg=#cecece    guibg=#7b7b7b    guisp=#7b7b7b    gui=NONE    ctermfg=252 ctermbg=8    cterm=NONE
+hi PmenuSel        guifg=#ffffff    guibg=#949494    guisp=#949494    gui=NONE    ctermfg=15 ctermbg=246    cterm=NONE
+hi PmenuSbar       guifg=NONE    guibg=#9c9cf7    guisp=#9c9cf7    gui=NONE    ctermfg=NONE ctermbg=147    cterm=NONE
+hi PmenuThumb      guifg=NONE    guibg=#bd6bbd    guisp=#bd6bbd    gui=NONE    ctermfg=NONE ctermbg=133    cterm=NONE
+
+" --------------------------------
+" Spelling
+" --------------------------------
+hi SpellBad        guifg=NONE    guibg=#ad524a    guisp=#ad524a    gui=NONE    ctermfg=NONE ctermbg=131    cterm=NONE
+hi SpellCap        guifg=NONE    guibg=#c88e2f    guisp=#c88e2f    gui=NONE    ctermfg=NONE ctermbg=179    cterm=NONE
+hi SpellLocal      guifg=NONE    guibg=#c88e2f    guisp=#c88e2f    gui=NONE    ctermfg=NONE ctermbg=179    cterm=NONE
+hi SpellRare       guifg=NONE    guibg=#bd6bbd    guisp=#bd6bbd    gui=NONE    ctermfg=NONE ctermbg=133    cterm=NONE
+
+" --------------------------------
+" Language Specific (add your own here)
+" --------------------------------
+
+hi javaScriptNumber          guifg=#ffff7b    guibg=NONE    guisp=NONE    gui=NONE    ctermfg=123 ctermbg=NONE    cterm=NONE
 
 
-" <http://www.blitzbasic.com/Community/posts.php?topic=52312>
-let s:colorsets.basic = {
-  \ 'black': '#000000',
-  \ 'white': '#FFFFFF',
-  \ 'red': '#68372B',
-  \ 'cyan': '#70A4B2',
-  \ 'purple': '#6F3D86',
-  \ 'green': '#588D43',
-  \ 'blue': '#352879',
-  \ 'yellow': '#B8C76F',
-  \ 'orange': '#6F4F25',
-  \ 'brown': '#433900',
-  \ 'lightred': '#9A6759',
-  \ 'darkgrey': '#444444',
-  \ 'grey': '#6C6C6C',
-  \ 'lightgreen': '#9AD284',
-  \ 'lightblue': '#6C5EB5',
-  \ 'lightgrey': '#959595'
-\}
-
-" CCS 3.2.2002
-let s:colorsets.ccs = {
-  \ 'black': '#191d19',
-  \ 'white': '#fcf9fc',
-  \ 'red': '#933a4c',
-  \ 'cyan': '#b6fafa',
-  \ 'purple': '#d27ded',
-  \ 'green': '#6acf6f',
-  \ 'blue': '#4f44d8',
-  \ 'yellow': '#fbfb8b',
-  \ 'orange': '#d89c5b',
-  \ 'brown': '#7f5307',
-  \ 'lightred': '#ef839f',
-  \ 'darkgrey': '#575753',
-  \ 'grey': '#a3a7a7',
-  \ 'lightgreen': '#b7fbbf',
-  \ 'lightblue': '#a397ff',
-  \ 'lightgrey': '#eff9e7'
-\}
-
-
-if exists('g:hi_c64_boot') && g:hi_c64_boot == 1
-  call HiC64Boot()
-endif
-
-
-HiC64 Normal lightblue black NONE
-HiC64 NonText green darkgrey NONE
-HiC64 LineNr black darkgrey NONE
-HiC64 StatusLine black white italic
-HiC64 StatusLineNC white darkgrey NONE
-HiC64 Cursor NONE NONE inverse
-"CursorIM
-HiC64 CursorColumn blue lightblue NONE
-HiC64 CursorLine NONE darkgrey NONE
-"IncSearch
-"ModeMsg
-HiC64 Search NONE NONE inverse
-HiC64 SpecialKey blue NONE NONE
-HiC64 VertSplit NONE grey NONE
-HiC64 Visual NONE blue NONE
-
-"Directory
-"ErrorMsg
-"MoreMsg
-"Question
-"SignColumn
-"TabLine
-"TabLineFill
-"TabLineSel
-"Title
-"WarningMsg
-"WildMenu
-
-"DiffAdd
-"DiffChange
-"DiffDelete
-"DiffText
-"FoldColumn
-"Folded
-
-"MatchParen
-"Pmenu
-"PmenuSbar
-"PmenuSel
-"PmenuThumb
-"SpellBad
-"SpellCap
-"SpellLocal
-"SpellRare
-
-HiC64 Comment red NONE NONE
-HiC64 Constant cyan NONE NONE
-"  HiC64 Boolean
-"  "Character
-"  "Float
-"  HiC64 Number
-"  HiC64 String
-"HiC64 Error
-HiC64 Identifier purple NONE NONE
-"  "Function
-"HiC64 Ignore
-"HiC64 PreProc
-"  "Define
-"  "Include
-"  "Macro
-"  "PreCondit
-"HiC64 Special
-"  "Debug
-"  "Delimiter
-"  "SpecialChar
-"  "SpecialComment
-"  "Tag
-HiC64 Statement lightgreen NONE NONE
-"HiC64 Statement
-"  HiC64 Conditional
-"  HiC64 Exception
-"  HiC64 Keyword
-"  "Label
-"  HiC64 Operator
-"  HiC64 Repeat
-"HiC64 Todo
-HiC64 Type orange NONE NONE
-"  "StorageClass
-"  "Structure
-"  "Typedef
-"HiC64 Underlined
 

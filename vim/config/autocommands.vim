@@ -37,6 +37,9 @@ if has("autocmd")
     autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
+    " C64 Assembly
+    autocmd BufRead *.asm set filetype=kickass
+
     " Don't show tabs in html/xml files
     autocmd filetype html,xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 listchars-=tab:>. fileencoding=utf8
 

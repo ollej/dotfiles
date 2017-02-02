@@ -11,14 +11,21 @@ alias jag='ag --js'
 alias updatectags="ctags -R --exclude=.git --exclude=logs --exclude=doc --exclude=tmp ."
 
 # Promote aliases
-alias testing="bundle_all_the_things; prepare_test_db; test_all_the_things"
+alias prepare_test_db="pushd ~/Development/promote; bundle exec rake db:drop db:create db:migrate db:test:prepare db:seed; popd"
 alias apps="less ~/Seafile/Server\ Info/Servers/promoteapp.net.md"
+alias gudapps='less ~/Seafile/Server\ Info/Servers/promote-gud.md'
+alias i18nsync='pushd ~/Development/promote; bundle exec rake i18nlite:clear_cache i18nlite:sync i18nlite:trim_keys; popd'
 alias cluster=". ~/bin/cluster_setup"
 alias nocluster="unset CLUSTER SUDO"
 alias be="bundle exec"
 alias br="bundle exec rake"
 alias bs="bundle exec rspec"
 
+# Promote dev aliases
+alias promote='cd ~/Development/promote'
+alias gud='cd ~/Development/ansible/repos/promote-gud'
+alias release='cd ~/Development/promote-release'
+alias fetch='cd ~/Development/ansible/repos/assessor'
 
 # Important aliases
 alias poke=touch
