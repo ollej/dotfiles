@@ -30,36 +30,30 @@ export PATH=/usr/local/bin:$PATH
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
 # virtualenv
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
-export PIP_RESPECT_VIRTUALENV=true
-if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
-    source /usr/local/bin/virtualenvwrapper.sh
-else
-    echo "WARNING: Can't find virtualenvwrapper.sh"
-fi
+#export WORKON_HOME=$HOME/.virtualenvs
+#export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
+#export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+#export PIP_VIRTUALENV_BASE=$WORKON_HOME
+#export PIP_RESPECT_VIRTUALENV=true
+#if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
+#    source /usr/local/bin/virtualenvwrapper.sh
+#else
+#    echo "WARNING: Can't find virtualenvwrapper.sh"
+#fi
 
 # Vim gpg
 export GPG_TTY=`tty`
 
 # pyenv
-eval "$(pyenv init -)"
+#eval "$(pyenv init -)"
 
 # perlbrew
 #source ~/perl5/perlbrew/etc/bashrc
 
-PERL_MB_OPT="--install_base \"/Users/olle/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/olle/perl5"; export PERL_MM_OPT;
 export ES_HOME=/usr/local/Cellar/elasticsearch/1.3.2/
 export KEY=~/Seafile/Server\ Info/Keys/avidity_second.key
 
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
+# chruby
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
