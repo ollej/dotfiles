@@ -1,0 +1,9 @@
+--type-add=js:ext:eco,ejs,coffee,js.erb
+--type-add=css:ext:scss
+--type-add=ruby:ext:ru,gemspec
+--type-add=ruby:is:Gemfile
+--pager=less -R
+--ignore-dir=vendor
+--ignore-dir=tmp
+--ignore-dir=logs
+
