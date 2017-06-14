@@ -97,25 +97,26 @@ function get_git_prompt {
 }
 
 function get_user {
-    local COLOR="$WHITE"
+    local color="$WHITE"
     case "$USER" in
-        root)   local COLOR="${BOLD_RED}" ;;
-        olle)   local COLOR="${GREEN}" ;;
-        olljoh) local COLOR="${GREEN}" ;;
-        *)      local COLOR="${YELLOW}" ;;
+        root)   local color="${BOLD_RED}" ;;
+        olle)   local color="${GREEN}" ;;
+        olljoh) local color="${GREEN}" ;;
+        *)      local color="${YELLOW}" ;;
     esac
-    echo "${COLOR}${USER}${NO_COLOR}"
+    echo "${color}${USER}${NO_COLOR}"
 }
 
 function get_host {
     # Add color depending on environment
     local host="$(uname -n)"
     case "$host" in
-        Lamarr.local) local COLOR="${CYAN}"; host="" ;; #host="Lamarr" ;;
-        bob)          local COLOR="${BOLD_CYAN}" ;;
-        *)            local COLOR="${YELLOW}" ;;
+        Lamarr.local)   local color="${CYAN}"; host="" ;; #host="Lamarr" ;;
+        Hamilton.local) local color="${CYAN}"; host="" ;;
+        bob)            local color="${BOLD_CYAN}" ;;
+        *)              local color="${YELLOW}" ;;
     esac
-    echo "${COLOR}${host}${NO_COLOR}"
+    echo "${color}${host}${NO_COLOR}"
 }
 
 function get_dir {
@@ -129,6 +130,7 @@ function get_dir {
     case "$dir" in
         olle | ~)      local color="${BOLD_WHITE}" ;;
         Development)   local color="${YELLOW}" ;;
+        promote)       local color="${BOLD_YELLOW}" ;;
         Dropbox)       local color="${GREEN}" ;;
         Downloads)     local color="${BLUE}" ;;
     esac

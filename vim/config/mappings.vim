@@ -38,33 +38,6 @@ nnoremap k gk
 " Use two exclamation points to save file using sudo
 cmap w!! w !sudo tee % >/dev/null
 
-"" vimux mappings
-"" --------------
-
-"" Prompt for a command to run
-"map <Leader>vp :VimuxPromptCommand<CR>
-"
-"" Run last command executed by VimuxRunCommand
-"map <Leader>vl :VimuxRunLastCommand<CR>
-"
-"" Inspect runner pane
-"map <Leader>vi :VimuxInspectRunner<CR>
-"
-"" Close vim tmux runner opened by VimuxRunCommand
-"map <Leader>vq :VimuxCloseRunner<CR>
-"
-"" Close all other tmux panes in current window
-"map <Leader>vx :VimuxClosePanes<CR>
-"
-"" Clear the tmux history of the runner pane
-"map <Leader>vc :VimuxClearRunnerHistory<CR>
-"
-"" If text is selected, save it in the v buffer and send that buffer it to tmux
-"vmap <LocalLeader>vs "vy :call VimuxRunCommand(@v . "\n", 0)<CR>
-"
-"" Select current paragraph and send it to tmux
-"nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
-
 "
 " Markdown syntax mappings
 " ------------------------
