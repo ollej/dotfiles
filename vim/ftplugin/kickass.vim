@@ -1,0 +1,1 @@
+colorscheme C64
