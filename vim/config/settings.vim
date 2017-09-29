@@ -58,7 +58,7 @@ set wildchar=<Tab> wildmenu wildmode=full   " Turn on completion menu.
 
 " Undo persistence
 set undofile                                " Save undo's after file closes
-set undodir=/tmp/vim/undo                   " Where to save undo histories
+set undodir=~/tmp/vim/undo                   " Where to save undo histories
 set undolevels=1000                         " How many undos
 set undoreload=10000                        " Number of lines to save for undo
 
@@ -82,9 +82,6 @@ set background=dark
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_clear_cache_on_exit = 0
-
-" Coffeelint configuration
-let g:syntastic_coffee_coffeelint_args="--file ~/.bash/coffeelint.json"
 
 " Encryption
 set cryptmethod=blowfish

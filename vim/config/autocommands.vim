@@ -27,15 +27,17 @@ if has("autocmd")
     autocmd FileType puppet,haml,scss,sass,yaml,eco,ejs setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     "autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     "autocmd FileType perl setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
-    autocmd FileType ruby,eruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab tags+=~/.vim/tags/ruby_and_gems
     autocmd FileType coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
     autocmd FileType textile setlocal wrap
 
     " Ruby
+    autocmd FileType ruby,eruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType ruby,eruby setlocal tags+=~/.vim/tags/ruby_and_gems
     autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
     autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
     autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+    autocmd FileType eruby let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of a variable in void context'}
 
     " C64 Assembly
     autocmd BufRead *.asm set filetype=kickass

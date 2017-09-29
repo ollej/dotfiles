@@ -142,6 +142,12 @@ nnoremap <Leader>d mzYp`z
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>M mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
+" Follow link in help
+nnoremap t <C-]>
+
+" Close location list window
+nnoremap <Leader>q :lclose<CR>
+
 " Movement, Emacs mappings
 " ------------------------
 
