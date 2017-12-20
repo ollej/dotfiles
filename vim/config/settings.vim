@@ -94,6 +94,8 @@ set tags+=./tags
 " Will still prompt if there is unsaved text in the buffer.
 set autoread
 
+let g:rspec_command = "!bundle exec rspec {spec}"
+
 " Use ag instead of ack to search, if available.
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'

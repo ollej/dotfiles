@@ -7,6 +7,12 @@ stty stop 'undef'
 source $HOME/.bash/aliases.sh
 source $HOME/.bash/git.sh
 source $HOME/.bash/prompt.sh
+
+# Set window title
+function title {
+    echo -ne "\033]0;"$*"\007"
+}
+
 # Vim Powerline bindings
 #source /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
@@ -51,9 +57,10 @@ export GPG_TTY=`tty`
 # perlbrew
 #source ~/perl5/perlbrew/etc/bashrc
 
-export ES_HOME=/usr/local/Cellar/elasticsearch/1.3.2/
-export KEY=~/Seafile/Server\ Info/Keys/avidity_second.key
+#export ES_HOME=/usr/local/Cellar/elasticsearch/1.3.2/
+export ES_HOME='/usr/local/Cellar/elasticsearch@1.7/1.7.6_1'
 
 # chruby
-source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/share/chruby/chruby.sh
+chruby 2.4.2
 source /usr/local/share/chruby/auto.sh

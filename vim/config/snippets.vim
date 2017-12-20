@@ -1,3 +1,8 @@
 iabbrev ddate <C-r>=strftime("%F")<CR>
 iabbrev mit By Olle Johansson <http://ollej.mit-license.org> <C-r>=strftime("%F")<CR> under the MIT license.
-iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit
+iabbrev raven Once upon a midnight dreary, while I pondered, weak and weary
+iabbrev keats Truth is beauty, beauty is truth.
+iabbrev kublai In Xanadu did Kubla Khan, A stately pleasure-dome decree
+iabbrev conan Crush your enemies, see them driven before you, and hear the lamentation of the women!
+iabbrev iä iä! iä! Cthulhu fhtagn!

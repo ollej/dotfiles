@@ -6,4 +6,6 @@
 --ignore-dir=vendor
 --ignore-dir=tmp
 --ignore-dir=logs
+--ignore-dir=log
+--ignore-dir=.git
 

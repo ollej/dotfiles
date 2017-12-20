@@ -12,7 +12,6 @@ git config --global grep.lineNumber true
 git config --global commit.template $HOME/.gitmessage.txt
 
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
-git config --global alias.amaze diff
 git config --global alias.ci "commit --verbose"
 git config --global alias.co checkout
 git config --global alias.dc "diff --cached"
@@ -22,3 +21,12 @@ git config --global alias.rm "branch -d"
 git config --global alias.unstage 'reset HEAD --'
 git config --global alias.last 'log -1 HEAD'
 git config --global alias.cowboy '!f() { git checkout --track -b "oj-$1" origin/master; }; f'
+git config --global alias.ignore 'update-index --assume-unchanged'
+git config --global alias.unignore 'update-index --no-assume-unchanged'
+git config --global alias.alias '!f() { git config --get-regexp "^alias.${1}$" ; }; f'
+git config --global alias.lsa '!f() { git config --get-regexp alias | sort | sed s/^alias\.// | sed "s/[[:space:]]/	/" | expand -t 12; }; f'
+git config --global alias.forcepush "push --force-with-lease"
+
+# doge git
+git config --global alias.amaze diff
+git config --global alias.wow status

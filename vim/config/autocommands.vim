@@ -23,8 +23,8 @@ if has("autocmd")
 
     " Settings on a per filetype basis
     autocmd FileType lua setlocal tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab
-    autocmd FileType javascript setlocal tabstop=4 shiftwidth=4 expandtab
-    autocmd FileType puppet,haml,scss,sass,yaml,eco,ejs setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    "autocmd FileType javascript setlocal tabstop=4 shiftwidth=4 expandtab
+    autocmd FileType javascript,puppet,haml,scss,sass,yaml,eco,ejs setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
     "autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     "autocmd FileType perl setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
     autocmd FileType coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
@@ -41,6 +41,9 @@ if has("autocmd")
 
     " C64 Assembly
     autocmd BufRead *.asm set filetype=kickass
+
+    " OpenSCAD
+    autocmd BufRead *.scad set filetype=openscad
 
     " Don't show tabs in html/xml files
     autocmd filetype html,xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 listchars-=tab:>. fileencoding=utf8

@@ -169,7 +169,7 @@ nnoremap <C-y> yy
 "noremap <silent> é :FufBuffer<CR>
 "
 " Toggle NERD_tree
-nnoremap <silent> § :NERDTreeToggle<CR>
+nnoremap <silent> § :NERDTreeToggle%<CR>
 " BufExplorer
 nnoremap <silent> <Leader>§ :BufExplorerHorizontalSplit<CR>
 
