@@ -12,7 +12,7 @@ nnoremap <C-h> <C-W>h
 " Quick buffer switching
 nnoremap <silent> <Tab> :b#<CR>
 " Maximize split
-nnoremap <C-m> <C-w>_
+nnoremap <Leader><C-m> <C-w>_
 " Make splits equal size
 nnoremap <Leader>m <C-w>=
 
@@ -37,6 +37,20 @@ nnoremap k gk
 
 " Use two exclamation points to save file using sudo
 cmap w!! w !sudo tee % >/dev/null
+
+" Keep selected text when fixing indentation
+vnoremap < <gv
+vnoremap > >gv
+
+" Use backspace to move up a block
+nnoremap <BS> {
+onoremap <BS> {
+vnoremap <BS> {
+
+" Use enter to move down a block
+nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+vnoremap <CR> }
 
 "
 " Markdown syntax mappings

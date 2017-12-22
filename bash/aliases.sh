@@ -21,7 +21,7 @@ alias be="bundle exec"
 alias br="bundle exec rake"
 alias bs="bundle exec rspec"
 alias bebug='bundle exec rspec -rbyebug -rpry'
-alias remigrate="bundle exec rake db:migrate && bundle exec rake db:rollback && bundle exec rake db:migrate && rake parallel:prepare"
+alias remigrate="bundle exec rake db:migrate && bundle exec rake db:rollback && bundle exec rake db:migrate && bundle exex rake parallel:prepare"
 
 # Promote dev aliases
 alias promote='cd ~/Development/promote/promote'
