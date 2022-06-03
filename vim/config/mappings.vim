@@ -36,7 +36,8 @@ nnoremap j gj
 nnoremap k gk
 
 " Use two exclamation points to save file using sudo
-cmap w!! w !sudo tee % >/dev/null
+"cmap w!! w !sudo tee % >/dev/null
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Keep selected text when fixing indentation
 vnoremap < <gv
@@ -207,6 +208,8 @@ map <Leader>rs :call RunNearestSpec()<CR>
 map <Leader>rl :call RunLastSpec()<CR>
 map <Leader>ra :call RunAllSpecs()<CR>
 
+" Rust
+nnoremap <silent> <Leader>c :!cargo run<CR>
 
 " Remap VIM 0 to first non-blank character
 nnoremap 0 ^

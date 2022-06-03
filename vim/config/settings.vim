@@ -100,3 +100,6 @@ let g:rspec_command = "!bundle exec rspec {spec}"
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+" Format Rust code on save
+let g:rustfmt_autosave = 1
