@@ -9,8 +9,12 @@ source $HOME/.bash/git.sh
 source $HOME/.bash/prompt.sh
 
 # Set window title
-function title {
+function title() {
     echo -ne "\033]0;"$*"\007"
+}
+
+function servedir() {
+    ruby -run -e httpd . -p ${1:-9999}
 }
 
 # Vim Powerline bindings
@@ -30,7 +34,7 @@ export LESS="--RAW-CONTROL-CHARS"   # Make ANSI colors work in less
 
 export EDITOR=vim
 
-export PATH=/usr/local/bin:$PATH
+export PATH=~/bin:/usr/local/bin:$PATH
 
 # Better locale
 export LC_ALL=en_US.UTF-8
@@ -62,5 +66,8 @@ export ES_HOME='/usr/local/Cellar/elasticsearch@1.7/1.7.6_1'
 
 # chruby
 source /usr/local/share/chruby/chruby.sh
-chruby 2.4.2
+chruby 3.1.1
 source /usr/local/share/chruby/auto.sh
+
+source "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
