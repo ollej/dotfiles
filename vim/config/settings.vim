@@ -70,13 +70,14 @@ call pathogen#infect()
 highlight Pmenu ctermbg=238 gui=bold
 
 " Syntax highlighting and indentation
-syntax on
+syntax enable
 filetype plugin on
 filetype plugin indent on
 
 " Colorscheme
-colorscheme solarized
+colorscheme dracula
 set background=dark
+highlight Comment cterm=italic
 
 " CtrlP
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -103,3 +104,6 @@ endif
 
 " Format Rust code on save
 let g:rustfmt_autosave = 1
+
+" airline settings
+let g:airline_powerline_fonts = 1

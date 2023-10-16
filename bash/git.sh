@@ -16,5 +16,6 @@ alias gstaged='git diff --cached'
 
 export GIT_EDITOR=vim
 export GIT_PAGER=less
+export GIT_EXTERNAL_DIFF=difft
 
 source ~/.bash/git-completion.bash

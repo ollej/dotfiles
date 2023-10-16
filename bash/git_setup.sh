@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-git config --global user.email "Olle@Johansson.com"
-git config --global user.name "Olle Johansson"
+git config --global user.email "github@ollej.com"
+git config --global user.name "Olle Wreede"
 git config --global diff.tool vimdiff
 git config --global merge.tool vimdiff
 git config --global color.diff true
@@ -13,6 +13,7 @@ git config --global commit.template $HOME/.gitmessage.txt
 
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 git config --global alias.ci "commit --verbose"
+git config --global alias.st status
 git config --global alias.co checkout
 git config --global alias.dc "diff --cached"
 git config --global alias.rb "rebase -p"
