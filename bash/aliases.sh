@@ -2,11 +2,12 @@
 # Default aliases
 
 #alias vim=vi
-alias sl=exa
-alias rack='ag --ruby'
-alias rag='ag --ruby'
-alias jack='ag --js'
-alias jag='ag --js'
+alias sl=eza
+alias rack='rg -t ruby'
+alias rag='rg -t ruby'
+alias jack='rg -t js'
+alias jag='rg -t js'
+alias rrg='rg -t rust'
 
 alias updatectags="ctags -R --exclude=.git --exclude=logs --exclude=doc --exclude=tmp ."
 
@@ -36,17 +37,17 @@ export CLICOLOR=1
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 alias ls="ls -Fh"
 
-alias els="exa --color=auto --icons --long"
-alias elt="exa --color=auto --icons --tree"
+alias els="eza --color=auto --icons --long"
+alias elt="eza --color=auto --icons --tree"
 
-# exa aliases
-if hash exa 2>/dev/null; then
-    #alias ls='exa'
-    alias l='exa -l --all --group-directories-first --git --icons'
-    alias ll='exa -l --all --all --group-directories-first --git --icons'
-    alias lt='exa -T --git-ignore --level=2 --group-directories-first --icons'
-    alias llt='exa -lT --git-ignore --level=2 --group-directories-first --icons'
-    alias lT='exa -T --git-ignore --level=4 --group-directories-first --icons'
+# eza aliases
+if hash eza 2>/dev/null; then
+    #alias ls='eza'
+    alias l='eza -l --all --group-directories-first --git --icons'
+    alias ll='eza -l --all --all --group-directories-first --git --icons'
+    alias lt='eza -T --git-ignore --level=2 --group-directories-first --icons'
+    alias llt='eza -lT --git-ignore --level=2 --group-directories-first --icons'
+    alias lT='eza -T --git-ignore --level=4 --group-directories-first --icons'
 else
     alias l='ls -lah'
     alias ll='ls -alF'

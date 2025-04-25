@@ -1,4 +1,4 @@
-" vimrc for Olle Johansson
+" vimrc for Olle Wreede
 " Inspirations from:
 " * https://github.com/niklasl/vimheap
 " * https://github.com/henrik/dotfiles

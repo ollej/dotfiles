@@ -98,8 +98,8 @@ set autoread
 let g:rspec_command = "!bundle exec rspec {spec}"
 
 " Use ag instead of ack to search, if available.
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
 endif
 
 " Format Rust code on save

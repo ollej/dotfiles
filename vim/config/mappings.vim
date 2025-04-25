@@ -15,6 +15,8 @@ nnoremap <silent> <Tab> :b#<CR>
 nnoremap <Leader><C-m> <C-w>_
 " Make splits equal size
 nnoremap <Leader>m <C-w>=
+" Toggle split maximize
+nnoremap <Leader>M :MaximizerToggle<CR>
 
 " Paste indented code aka the "stairs"
 nnoremap <C-P> p=`]
@@ -155,7 +157,7 @@ nnoremap <Leader>l :SyntasticCheck<CR>
 nnoremap <Leader>d mzYp`z
 
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>M mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+noremap <Leader>W mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Follow link in help
 nnoremap t <C-]>
@@ -185,6 +187,7 @@ nnoremap <C-y> yy
 "
 " Toggle NERD_tree
 nnoremap <silent> § :NERDTreeToggle%<CR>
+nnoremap <silent> <Leader>h :NERDTreeToggle%<CR>
 " BufExplorer
 nnoremap <silent> <Leader>§ :BufExplorerHorizontalSplit<CR>
 
