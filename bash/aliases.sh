@@ -8,10 +8,11 @@ alias rag='rg -t ruby'
 alias jack='rg -t js'
 alias jag='rg -t js'
 alias rrg='rg -t rust'
+alias gpw='openssl rand -base64 12'
 
 alias updatectags="ctags -R --exclude=.git --exclude=logs --exclude=doc --exclude=tmp ."
 
-# Promote aliases
+# Rails aliases
 alias be="bundle exec"
 alias br="bundle exec rails"
 alias bs="bundle exec rspec"
